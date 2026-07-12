@@ -82,16 +82,20 @@ def get_logger(
 
     # --- Rotating File Handler ---
     if log_to_file:
-        log_path = Path(log_dir)
-        log_path.mkdir(parents=True, exist_ok=True)
+        try:
+            log_path = Path(log_dir)
+            log_path.mkdir(parents=True, exist_ok=True)
 
-        file_handler = logging.FileHandler(
-            log_path / "system.log",
-            mode="a",
-            encoding="utf-8",
-        )
-        file_handler.setFormatter(JSONFormatter())
-        logger.addHandler(file_handler)
+            file_handler = logging.FileHandler(
+                log_path / "system.log",
+                mode="a",
+                encoding="utf-8",
+            )
+            file_handler.setFormatter(JSONFormatter())
+            logger.addHandler(file_handler)
+        except Exception as e:
+            # Fallback gracefully to console logging if file logging is not possible (e.g. read-only filesystem on cloud)
+            print(f"Warning: Failed to initialize file logging handler: {e}. Falling back to console-only logging.")
 
     # Prevent log propagation to root logger
     logger.propagate = False
