@@ -135,6 +135,13 @@ class ChurnExplainer:
         """
         X_prep, _ = self._get_preprocessed_df(df)
 
+        # Sample data to avoid memory and CPU exhaustion on Streamlit Cloud
+        if len(X_prep) > 200:
+            logger.info("Sampling 200 customer records for global SHAP calculation to prevent OOM/CPU throttling.")
+            X_prep_sample = X_prep.sample(n=200, random_state=42)
+        else:
+            X_prep_sample = X_prep
+
         if not self.is_shap_available or self.explainer is None:
             logger.warning("SHAP unavailable. Retrieving model internal feature importances.")
             fitted_model = self.pipeline.named_steps["model"]
@@ -146,7 +153,7 @@ class ChurnExplainer:
             logger.info("Computing global SHAP values...")
             # Compute SHAP values for the batch
             # We use the explainer check for probability outputs or raw margins
-            shap_values = self.explainer.shap_values(X_prep)
+            shap_values = self.explainer.shap_values(X_prep_sample)
 
             # For binary classification, shap_values can be a list [class_0, class_1]
             # or a single 2D array depending on shap package/model type.
@@ -158,7 +165,7 @@ class ChurnExplainer:
 
             # Mean absolute SHAP value represents global impact
             mean_abs_shap = np.abs(shap_values_class).mean(axis=0)
-            importance_dict = {X_prep.columns[i]: float(mean_abs_shap[i]) for i in range(len(X_prep.columns))}
+            importance_dict = {X_prep_sample.columns[i]: float(mean_abs_shap[i]) for i in range(len(X_prep_sample.columns))}
             return dict(sorted(importance_dict.items(), key=lambda x: x[1], reverse=True))
 
         except Exception as e:
