@@ -18,7 +18,7 @@ help:
 
 install:
 	pip install -r requirements.txt
-	pip install pytest pytest-cov pytest-mock pre-commit
+	pip install -r requirements-dev.txt
 
 run:
 	streamlit run src/dashboard/app.py
