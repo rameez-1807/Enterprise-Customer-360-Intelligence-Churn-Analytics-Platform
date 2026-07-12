@@ -66,8 +66,16 @@ def main() -> None:
     inject_theme_styling()
 
     # 3. State initialization
-    initialize_session_state()
-    service: DashboardDataService = st.session_state["data_service"]
+    try:
+        initialize_session_state()
+        service: DashboardDataService = st.session_state["data_service"]
+    except Exception as e:
+        import traceback
+        st.error("### 🚨 Critical Application Startup Error")
+        st.write("An exception occurred while initializing the Dashboard Data Service:")
+        st.exception(e)
+        st.code(traceback.format_exc(), language="python")
+        return
 
     # 4. Sidebar Navigation
     st.sidebar.markdown(
