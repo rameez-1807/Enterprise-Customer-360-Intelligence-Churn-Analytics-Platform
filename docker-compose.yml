@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: customer_360_dashboard
+    ports:
+      - "8501:8501"
+    volumes:
+      - .env:/app/.env
+      - ./data:/app/data
+      - ./logs:/app/logs
+    restart: unless-stopped
+    environment:
+      - APP_ENV=PROD
+      - LOG_LEVEL=INFO

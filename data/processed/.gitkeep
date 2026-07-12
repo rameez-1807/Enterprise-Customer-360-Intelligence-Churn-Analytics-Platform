@@ -1,0 +1,3 @@
+# This file ensures the data/processed/ directory is tracked by Git.
+# Cleaned, imputed, and staged intermediate datasets are stored here.
+# Contents are auto-generated and excluded from version control via .gitignore.

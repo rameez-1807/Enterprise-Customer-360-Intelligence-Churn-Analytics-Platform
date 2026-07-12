@@ -1,0 +1,4 @@
+# This file ensures the data/outputs/ directory is tracked by Git.
+# Production analytical marts (Parquet) and serialized ML model artifacts
+# are stored here. Contents are auto-generated and excluded from version
+# control via .gitignore.

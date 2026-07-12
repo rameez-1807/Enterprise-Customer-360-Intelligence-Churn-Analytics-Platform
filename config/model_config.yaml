@@ -1,0 +1,190 @@
+# =============================================================================
+# Enterprise Customer 360 Intelligence & Churn Analytics Platform
+# Machine Learning & Domain Configuration Manifest
+# =============================================================================
+# This YAML file centralizes all tunable parameters for the data processing,
+# feature engineering, and machine learning pipelines. Modifying values here
+# does NOT require code changes.
+# =============================================================================
+
+# ---------------------------------------------------------------------------
+# Target Variable Definition
+# ---------------------------------------------------------------------------
+target:
+  column_name: "Churn"
+  positive_class: 1
+  negative_class: 0
+
+# ---------------------------------------------------------------------------
+# Data Processing Parameters
+# ---------------------------------------------------------------------------
+data_processing:
+  # Columns expected to contain missing values requiring imputation
+  imputation_columns:
+    numerical:
+      - "Tenure"
+      - "WarehouseToHome"
+      - "HourSpendOnApp"
+      - "OrderAmountHikeFromlastYear"
+      - "CouponUsed"
+      - "OrderCount"
+      - "DaySinceLastOrder"
+    categorical: []
+
+  # Outlier treatment boundaries (IQR multiplier)
+  outlier_iqr_multiplier: 1.5
+
+  # Columns to apply outlier clipping
+  outlier_columns:
+    - "Tenure"
+    - "WarehouseToHome"
+    - "NumberOfAddress"
+    - "OrderAmountHikeFromlastYear"
+    - "CouponUsed"
+    - "OrderCount"
+    - "DaySinceLastOrder"
+
+  # Train-test split ratio
+  test_size: 0.2
+  random_state: 42
+
+# ---------------------------------------------------------------------------
+# Feature Engineering Parameters
+# ---------------------------------------------------------------------------
+feature_engineering:
+  # Tenure binning thresholds (months)
+  tenure_bins: [0, 6, 12, 24, 48, 120]
+  tenure_labels: ["0-6m", "6-12m", "12-24m", "24-48m", "48m+"]
+
+  # Categorical columns requiring encoding
+  categorical_encode_columns:
+    - "PreferredLoginDevice"
+    - "PreferredPaymentMode"
+    - "Gender"
+    - "PreferedOrderCat"
+    - "MaritalStatus"
+
+  # Columns to drop before model training
+  drop_columns:
+    - "CustomerID"
+
+# ---------------------------------------------------------------------------
+# RFM Scoring Parameters
+# ---------------------------------------------------------------------------
+rfm:
+  recency_column: "DaySinceLastOrder"
+  frequency_column: "OrderCount"
+  monetary_column: "CashbackAmount"
+  quantile_bins: 5
+  segment_labels:
+    "555": "Champions"
+    "554": "Champions"
+    "544": "Loyal Customers"
+    "545": "Loyal Customers"
+    "454": "Loyal Customers"
+    "455": "Loyal Customers"
+    "445": "Loyal Customers"
+    "543": "Promising"
+    "444": "Promising"
+    "435": "Promising"
+    "355": "Promising"
+    "354": "Need Attention"
+    "345": "Need Attention"
+    "344": "Need Attention"
+    "335": "Need Attention"
+    "253": "About to Sleep"
+    "252": "About to Sleep"
+    "243": "About to Sleep"
+    "242": "About to Sleep"
+    "235": "About to Sleep"
+    "234": "About to Sleep"
+    "225": "About to Sleep"
+    "155": "Can't Lose Them"
+    "154": "Can't Lose Them"
+    "145": "Can't Lose Them"
+    "255": "At Risk"
+    "254": "At Risk"
+    "245": "At Risk"
+    "244": "At Risk"
+    "153": "At Risk"
+    "152": "At Risk"
+    "143": "At Risk"
+    "142": "At Risk"
+    "135": "At Risk"
+    "134": "At Risk"
+    "125": "At Risk"
+    "124": "At Risk"
+    "111": "Hibernating"
+    "112": "Hibernating"
+    "121": "Hibernating"
+    "131": "Hibernating"
+    "141": "Hibernating"
+    "211": "Hibernating"
+    "212": "Hibernating"
+    "221": "Hibernating"
+
+# ---------------------------------------------------------------------------
+# Machine Learning Model Parameters
+# ---------------------------------------------------------------------------
+model:
+  # Primary algorithm
+  algorithm: "xgboost"
+
+  # XGBoost hyperparameters
+  xgboost:
+    n_estimators: 300
+    max_depth: 6
+    learning_rate: 0.1
+    subsample: 0.8
+    colsample_bytree: 0.8
+    min_child_weight: 3
+    gamma: 0.1
+    reg_alpha: 0.1
+    reg_lambda: 1.0
+    use_label_encoder: false
+    eval_metric: "logloss"
+    random_state: 42
+
+  # LightGBM hyperparameters (alternative)
+  lightgbm:
+    n_estimators: 300
+    max_depth: 6
+    learning_rate: 0.1
+    subsample: 0.8
+    colsample_bytree: 0.8
+    min_child_weight: 3
+    num_leaves: 31
+    random_state: 42
+    verbose: -1
+
+  # Cross-validation settings
+  cross_validation:
+    strategy: "stratified_kfold"
+    n_splits: 5
+    shuffle: true
+    random_state: 42
+
+# ---------------------------------------------------------------------------
+# KPI Benchmark Targets
+# ---------------------------------------------------------------------------
+kpi_benchmarks:
+  churn_rate_target_pct: 15.0
+  csat_target: 4.0
+  ltv_cac_ratio_target: 3.0
+  retention_rate_target_pct: 85.0
+  nrr_target_pct: 100.0
+
+# ---------------------------------------------------------------------------
+# SHAP Explainability Parameters
+# ---------------------------------------------------------------------------
+explainability:
+  top_n_features: 10
+  shap_sample_size: 500
+
+# ---------------------------------------------------------------------------
+# Risk Tier Classification Thresholds
+# ---------------------------------------------------------------------------
+risk_tiers:
+  high_risk_threshold: 0.70
+  medium_risk_threshold: 0.40
+  # Low risk: probability < medium_risk_threshold

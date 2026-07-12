@@ -1,0 +1,86 @@
+# =============================================================================
+# Enterprise Customer 360 Intelligence & Churn Analytics Platform
+# PEP 621 Project Configuration
+# =============================================================================
+
+[build-system]
+requires = ["setuptools>=69.0", "wheel>=0.42.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "enterprise-customer-360-platform"
+version = "1.0.0"
+description = "Enterprise Customer 360 Intelligence & Churn Analytics Platform — A Fortune 500 grade analytical engine for customer retention, churn prediction, and business intelligence."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Enterprise Analytics Team"},
+]
+keywords = [
+    "customer-360",
+    "churn-prediction",
+    "business-intelligence",
+    "machine-learning",
+    "analytics-platform",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Office/Business :: Financial :: Spreadsheet",
+]
+
+[project.urls]
+Homepage = "https://github.com/enterprise-analytics/customer-360-platform"
+Documentation = "https://github.com/enterprise-analytics/customer-360-platform/docs"
+Repository = "https://github.com/enterprise-analytics/customer-360-platform"
+
+# =============================================================================
+# Tool Configurations
+# =============================================================================
+
+[tool.black]
+line-length = 120
+target-version = ["py310", "py311", "py312"]
+
+[tool.isort]
+profile = "black"
+line_length = 120
+known_first_party = ["src"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+ignore_errors = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short --strict-markers"
+markers = [
+    "unit: Unit tests for individual functions and methods",
+    "integration: Integration tests for end-to-end pipeline verification",
+    "slow: Tests that require significant processing time",
+]
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["tests/*", "src/dashboard/*"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 80

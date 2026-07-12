@@ -1,0 +1,18 @@
+# CODEOWNERS file for Enterprise Customer 360 Platform
+# This directs review requests to specific engineers.
+
+# Global owners (default reviewers)
+*       @md-rameez-ahmad
+
+# Machine Learning & AI Modules
+/src/models/    @md-rameez-ahmad
+
+# Data Pipelines & Schema Definitions
+/src/data/      @md-rameez-ahmad
+
+# UI & Dashboard Renderers
+/src/dashboard/ @md-rameez-ahmad
+
+# Core Configurations & CI Workflow
+/config/        @md-rameez-ahmad
+/.github/       @md-rameez-ahmad
