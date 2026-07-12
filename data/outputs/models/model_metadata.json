@@ -1,0 +1,190 @@
+{
+    "training_timestamp": "2026-07-12T09:49:16.531605+00:00",
+    "leaderboard": {
+        "LogisticRegression": {
+            "test_accuracy": 0.8188,
+            "test_precision": 0.4789,
+            "test_recall": 0.8368,
+            "test_f1_score": 0.6092,
+            "test_roc_auc": 0.9021,
+            "cv_f1_mean": 0.6229,
+            "cv_f1_std": 0.0171,
+            "training_time_seconds": 0.0862,
+            "confusion_matrix": [
+                [
+                    763,
+                    173
+                ],
+                [
+                    31,
+                    159
+                ]
+            ]
+        },
+        "RandomForest": {
+            "test_accuracy": 0.9822,
+            "test_precision": 0.9381,
+            "test_recall": 0.9579,
+            "test_f1_score": 0.9479,
+            "test_roc_auc": 0.9981,
+            "cv_f1_mean": 0.8729,
+            "cv_f1_std": 0.0129,
+            "training_time_seconds": 0.8185,
+            "confusion_matrix": [
+                [
+                    924,
+                    12
+                ],
+                [
+                    8,
+                    182
+                ]
+            ]
+        },
+        "XGBoost": {
+            "test_accuracy": 0.9813,
+            "test_precision": 0.9082,
+            "test_recall": 0.9895,
+            "test_f1_score": 0.9471,
+            "test_roc_auc": 0.9978,
+            "cv_f1_mean": 0.8646,
+            "cv_f1_std": 0.022,
+            "training_time_seconds": 0.6763,
+            "confusion_matrix": [
+                [
+                    917,
+                    19
+                ],
+                [
+                    2,
+                    188
+                ]
+            ]
+        },
+        "LightGBM": {
+            "test_accuracy": 0.9822,
+            "test_precision": 0.9126,
+            "test_recall": 0.9895,
+            "test_f1_score": 0.9495,
+            "test_roc_auc": 0.9983,
+            "cv_f1_mean": 0.8644,
+            "cv_f1_std": 0.0171,
+            "training_time_seconds": 0.5594,
+            "confusion_matrix": [
+                [
+                    918,
+                    18
+                ],
+                [
+                    2,
+                    188
+                ]
+            ]
+        }
+    },
+    "best_model": {
+        "algorithm": "LightGBM",
+        "metrics": {
+            "test_accuracy": 0.9822,
+            "test_precision": 0.9126,
+            "test_recall": 0.9895,
+            "test_f1_score": 0.9495,
+            "test_roc_auc": 0.9983,
+            "cv_f1_mean": 0.8644,
+            "cv_f1_std": 0.0171,
+            "training_time_seconds": 0.5594,
+            "confusion_matrix": [
+                [
+                    918,
+                    18
+                ],
+                [
+                    2,
+                    188
+                ]
+            ]
+        },
+        "feature_importance": [
+            {
+                "feature": "PreferedOrderCat_Laptop & Accessory",
+                "importance": 804.0
+            },
+            {
+                "feature": "TenureGroup_12-24m",
+                "importance": 758.0
+            },
+            {
+                "feature": "PreferredLoginDevice_Mobile Phone",
+                "importance": 756.0
+            },
+            {
+                "feature": "MaritalStatus_Married",
+                "importance": 705.0
+            },
+            {
+                "feature": "Gender_Female",
+                "importance": 597.0
+            },
+            {
+                "feature": "TenureGroup_0-6m",
+                "importance": 522.0
+            },
+            {
+                "feature": "TenureGroup_6-12m",
+                "importance": 356.0
+            },
+            {
+                "feature": "PreferedOrderCat_Others",
+                "importance": 355.0
+            },
+            {
+                "feature": "TenureGroup_24-48m",
+                "importance": 318.0
+            },
+            {
+                "feature": "PreferredLoginDevice_Computer",
+                "importance": 302.0
+            },
+            {
+                "feature": "PreferedOrderCat_Grocery",
+                "importance": 289.0
+            },
+            {
+                "feature": "PreferredPaymentMode_Debit Card",
+                "importance": 286.0
+            },
+            {
+                "feature": "PreferredPaymentMode_UPI",
+                "importance": 280.0
+            },
+            {
+                "feature": "PreferredPaymentMode_E wallet",
+                "importance": 270.0
+            },
+            {
+                "feature": "PreferedOrderCat_Mobile Phone",
+                "importance": 207.0
+            },
+            {
+                "feature": "MaritalStatus_Divorced",
+                "importance": 203.0
+            },
+            {
+                "feature": "PreferredPaymentMode_Credit Card",
+                "importance": 185.0
+            },
+            {
+                "feature": "WarehouseDistanceBucket_Moderate",
+                "importance": 112.0
+            },
+            {
+                "feature": "OrderFrequencyTier_Medium",
+                "importance": 93.0
+            },
+            {
+                "feature": "OrderFrequencyTier_Low",
+                "importance": 86.0
+            }
+        ]
+    }
+}

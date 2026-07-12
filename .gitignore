@@ -49,6 +49,9 @@ data/processed/*
 data/outputs/*
 !data/processed/.gitkeep
 !data/outputs/.gitkeep
+!data/outputs/models/
+!data/outputs/models/best_model.joblib
+!data/outputs/models/model_metadata.json
 
 # ---------------------------------------------------------------------------
 # Log Files
