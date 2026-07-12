@@ -4,9 +4,13 @@
 
 ---
 
+[🚀 Live Demo Link](https://customer-360-intelligence.streamlit.app) | [📂 Code Repository](https://github.com/rameez-1807/Enterprise-Customer-360-Intelligence-Churn-Analytics-Platform)
+
+---
+
 [![Build Status](https://img.shields.io/badge/CI-Passing-3fb950.svg)](#ci-cd)
 [![Python Version](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-3776AB?logo=python&logoColor=white)](https://python.org)
-[![Streamlit App](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io)
+[![Streamlit App](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?logo=streamlit&logoColor=white)](https://customer-360-intelligence.streamlit.app)
 [![ML Framework](https://img.shields.io/badge/ML-LightGBM%20%7C%20XGBoost-1f6feb.svg)](#machine-learning-pipeline)
 [![XAI Attributions](https://img.shields.io/badge/XAI-SHAP%20TreeExplainer-ff69b4.svg)](#explainable-ai--local-explanations)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
